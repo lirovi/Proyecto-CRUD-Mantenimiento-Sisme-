@@ -14,7 +14,8 @@ class DesignacionController extends Controller
      */
     public function index()
     {
-        //
+        $designacions = Designacion::orderBy('id','descripcion')->paginate(8);
+    return view('designacion.index', compact('designacions'));
     }
 
     /**
@@ -25,6 +26,7 @@ class DesignacionController extends Controller
     public function create()
     {
         //
+        return view('designacion.create');
     }
 
     /**
@@ -36,14 +38,12 @@ class DesignacionController extends Controller
     public function store(Request $request)
     {
         //
+       $designacions= new Designacion();
+       $designacions->descripcion = $request->input('descripcion');
+       $designacions->save();
+       return('Grabado');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         //

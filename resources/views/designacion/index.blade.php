@@ -1,34 +1,36 @@
 @extends('layout')
 
 @section('content')
-<div class="col-sm-8">
-  <h2></br>
-    Listado de Ayudantes
-    <a href="{{ route('ayudantes.create') }}" class="btn btn-primary pull-right" >Nuevo</a>
-  </h2>
-  <table class="table table-hover table-striped">
-    <thead>
-      <tr class="text-center">
-        <th width="20px">ID</th>
-        <th>Nombre</th>
-        <th colspan="3">&nbsp;</th>
-      </tr>
-    </thead>
-    <tbody>
-      @foreach ($ayudantes as $ayudante)
-          <tr class="text-center">
-            <td>{{ $ayudante->id }}</td>
-            <td>{{ $ayudante->name }}</td>
-            <td>ver</td>
-            <td>editar</td>
-            <td>borrar</td>
-          </tr>
-      @endforeach
-    </tbody>
-  </table>
-  {!! $ayudantes->render() !!}
-</div>
-<div class="col-sm-4">
-  mensaje
+<div class="container">
+  <div class="col-sm-8">
+    <h4 class="page-header text-center">
+      Listado de Designaciones
+    </h4>
+
+    <table class="table table-hover table-striped table-bordered table-sm">
+      <thead>
+        <tr class="text-center">
+          <th width="20px">ID</th>
+          <th width="500px">Descripción</th>
+          <th colspan="2"><a href="{{ route('desgnacions.create') }}" class="btn btn-warning" >Nuevo</a></th>
+        </tr>
+      </thead>
+      <tbody>
+        @foreach ($designacions as $designacion)
+            <tr class="text-ledt">
+              <td>{{ $designacion->id }}</td>
+              <td>{{ $designacion->descripcion }}</td>
+              <td><a href="{{route('designacions.create')}}"class="btn btn-success pull-right">Editar</a></td>
+              
+              <td><a href="{{route('designacions.create')}}"class="btn btn-danger pull-right">Eliminar</a></td>
+            </tr>
+        @endforeach
+      </tbody>
+    </table>
+    <ul class="pagination">
+            
+      </ul>
+    {!! $designacions->render() !!}
+  </div>
 </div>
 @endsection

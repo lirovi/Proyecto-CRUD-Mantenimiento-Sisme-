@@ -9,13 +9,13 @@
   </head>
   <body>
     <nav class="navbar navbar-dark bg-primary">
-      <a href="#" class="navbar-brand">Inicio</a>
+      <a href="#" class="navbar-brand">Mantenimientos Equipos - SISME</a>
     </nav>
 
       <div class="container">
           <div class="row">
             <div class="col-xs=10">
-                <h2 class="page-header text-center">Control mantenimiento de equipos de computación</h2>
+                <h2 class="page-header text-center"></h2>
             </div>
 
             @yield('content')

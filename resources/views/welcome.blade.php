@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Proyecto Lsrv</title>
+        <title>Sisme</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet" type="text/css">
@@ -85,12 +85,12 @@
                 </div>
 
                 <div class="links">
-                      <a href="{{ route('cargos.index') }}">Listado Aulas</a>
-                      <a href="{{ route('equipos.index') }}">Listado Docentes</a>
-                      <a href="{{ route('funcionarios.index') }}">Listado Materias</a>
-                      <a href="{{ route('dptos.index') }}">Listado Ayudantes</a>
-                      <a href="{{ route('unidads.index') }}">Listado Carreras</a>
-                      <a href="{{ route('profesions.index') }}">Listado Horarios</a>
+                      <a href="{{ route('cargos.index') }}">Listado Cargos</a>
+                      <a href="{{ route('equipos.index') }}">Listado Equipos</a>
+                      <a href="{{ route('funcionarios.index') }}">Listado Funcionarios</a>
+                      <a href="{{ route('dptos.index') }}">Listado Deptos</a>
+                      <a href="{{ route('unidads.index') }}">Listado Unidades</a>
+                      <a href="{{ route('profesions.index') }}">Listado Profesiones</a>
                 </div>
             </div>
         </div>

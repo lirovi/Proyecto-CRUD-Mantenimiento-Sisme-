@@ -1,14 +1,18 @@
-@extends('layouts.app')
+@extends('layout')
 
 @section('content')
 
-
-<form class="from-group" action="/docentes" method="post">
-  @csrf
-  <div class="form-group">
-    <label for="">Nombre</label>
-    <input type="text" name="name" class="form-control" >
-  </div>
-  <button type="submit" name="btn btn-primary">Guardar</button>
-</form>
+<div class="">
+	<h4 class="page-header text-center">Adicionar Departamentos</h4>
+</div>
+<div class="container">
+	<form class="from-group" action="/dptos" method="post">
+	  @csrf
+	  <div class="form-group">
+	    <label for="">Nombre</label>
+	    <input type="text" name="nombre" class="form-control" >
+	  </div>
+	  <button type="submit" name="btn btn-primary">Guardar</button>
+	</form>
+</div>
 @endsection

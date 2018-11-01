@@ -15,7 +15,7 @@ class CargoController extends Controller
      */
     public function index()
     {
-        $cargos = Cargo::orderBy('id','descripcion') ->paginate();
+        $cargos = Cargo::orderBy('id','descripcion')->paginate(8);
     return view('cargo.index', compact('cargos'));
     }
 
@@ -74,7 +74,7 @@ class CargoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Cargo $cargo)
     {
         //
     }
@@ -85,8 +85,9 @@ class CargoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Cargo $cargo)
     {
         //
+        return $cargo;
     }
 }

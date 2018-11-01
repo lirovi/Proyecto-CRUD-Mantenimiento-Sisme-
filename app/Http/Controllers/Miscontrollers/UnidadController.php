@@ -4,6 +4,7 @@ namespace Sisme\Http\Controllers\Miscontrollers;
 
 use Illuminate\Http\Request;
 use Sisme\Http\Controllers\Controller;
+use Sisme\Unidad;
 
 class UnidadController extends Controller
 {
@@ -14,7 +15,8 @@ class UnidadController extends Controller
      */
     public function index()
     {
-        //
+        $unidads = unidad::orderBy('id','nombre')->paginate(8);
+    return view('unidad.index', compact('unidads'));
     }
 
     /**
@@ -25,6 +27,7 @@ class UnidadController extends Controller
     public function create()
     {
         //
+        return view('unidad.create');
     }
 
     /**
@@ -36,6 +39,10 @@ class UnidadController extends Controller
     public function store(Request $request)
     {
         //
+       $unidads= new unidad();
+       $unidads->nombre = $request->input('nombre');
+       $unidads->save();
+       return('Grabado');
     }
 
     /**

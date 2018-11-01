@@ -4,6 +4,7 @@ namespace Sisme\Http\Controllers\Miscontrollers;
 
 use Illuminate\Http\Request;
 use Sisme\Http\Controllers\Controller;
+use Sisme\Dpto;
 
 class DptoController extends Controller
 {
@@ -12,9 +13,10 @@ class DptoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+     public function index()
     {
-        //
+        $dptos = dpto::orderBy('id','nombre')->paginate(8);
+    return view('dpto.index', compact('dptos'));
     }
 
     /**
@@ -25,6 +27,7 @@ class DptoController extends Controller
     public function create()
     {
         //
+        return view('dpto.create');
     }
 
     /**
@@ -36,7 +39,12 @@ class DptoController extends Controller
     public function store(Request $request)
     {
         //
+       $dptos= new dpto();
+       $dptos->nombre = $request->input('nombre');
+       $dptos->save();
+       return('Grabado');
     }
+
 
     /**
      * Display the specified resource.

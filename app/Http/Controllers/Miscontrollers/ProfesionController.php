@@ -4,6 +4,7 @@ namespace Sisme\Http\Controllers\Miscontrollers;
 
 use Illuminate\Http\Request;
 use Sisme\Http\Controllers\Controller;
+use Sisme\Profesion;
 
 class ProfesionController extends Controller
 {
@@ -14,7 +15,8 @@ class ProfesionController extends Controller
      */
     public function index()
     {
-        //
+        $profesions = profesion::orderBy('id','descripcion')->paginate(8);
+    return view('profesion.index', compact('profesions'));
     }
 
     /**
@@ -25,6 +27,7 @@ class ProfesionController extends Controller
     public function create()
     {
         //
+        return view('profesion.create');
     }
 
     /**
@@ -36,6 +39,10 @@ class ProfesionController extends Controller
     public function store(Request $request)
     {
         //
+       $profesions= new profesion();
+       $profesions->descripcion = $request->input('descripcion');
+       $profesions->save();
+       return('Grabado');
     }
 
     /**

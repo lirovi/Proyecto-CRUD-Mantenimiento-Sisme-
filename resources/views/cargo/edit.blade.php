@@ -3,10 +3,10 @@
 @section('content')
 
 <div class="">
-	<h4 class="page-header text-center">Adicionar Cargo</h4>
+	<h4 class="page-header text-center">Editar Cargo</h4>
 </div>
 <div class="container">
-	<form class="from-group" action="/cargos" method="post">
+	<form class="from-group" action="/cargos" method="PUT">
 	  @csrf
 	  <div class="form-group">
 	    <label for="">Descripción</label>
@@ -16,3 +16,4 @@
 	</form>
 </div>
 @endsection
+
