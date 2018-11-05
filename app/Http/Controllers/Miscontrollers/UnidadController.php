@@ -4,7 +4,10 @@ namespace Sisme\Http\Controllers\Miscontrollers;
 
 use Illuminate\Http\Request;
 use Sisme\Http\Controllers\Controller;
+use Sisme\Http\Requests\UnidadRequest;
 use Sisme\Unidad;
+use Sisme\Dpto;
+
 
 class UnidadController extends Controller
 {
@@ -13,9 +16,9 @@ class UnidadController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+   public function index()
     {
-        $unidads = unidad::orderBy('id','nombre')->paginate(8);
+        $unidads = Unidad::orderBy('id','nombre')->paginate(8);
     return view('unidad.index', compact('unidads'));
     }
 
@@ -27,7 +30,10 @@ class UnidadController extends Controller
     public function create()
     {
         //
-        return view('unidad.create');
+        $vdptos = Dpto::All()->pluck('nombre', 'id');
+ 
+        return view('unidad.create', compact('vunidad','vdptos'));
+        //return view('unidad.create');
     }
 
     /**
@@ -35,14 +41,27 @@ class UnidadController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+
+     public function store(Request $request)
     {
         //
        $unidads= new unidad();
-       $unidads->nombre = $request->input('nombre');
+       $unidads->descripcion = $request->input('descripcion');
        $unidads->save();
        return('Grabado');
+    }
+     */
+    public function store(UnidadRequest $request)
+    {
+        //
+        $unidad = new Unidad;
+        $unidad->nombre = $request->nombre;
+        $unidad->dpto_id = $request->dpto_id;
+
+        $unidad->save();
+
+        return redirect()->route('unidads.index')
+                        ->with('info','El nuevo registro ha sido guardado');
     }
 
     /**
@@ -53,7 +72,8 @@ class UnidadController extends Controller
      */
     public function show($id)
     {
-        //
+        $unidad = Unidad::find($id);
+        return view('unidad.show', compact('unidad'));
     }
 
     /**
@@ -64,7 +84,11 @@ class UnidadController extends Controller
      */
     public function edit($id)
     {
-        //
+        $vunidad = Unidad::find($id);
+        $vdptos = Dpto::All()->pluck('nombre', 'id');
+ 
+        return view('unidad.edit', compact('vunidad','vdptos'));
+        /*return view('unidad.edit', compact('vunidad'));*/
     }
 
     /**
@@ -74,9 +98,17 @@ class UnidadController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UnidadRequest $request, $id)
     {
         //
+        $vunidad = Unidad::find($id);
+        $vunidad->nombre = $request->nombre;
+        $vunidad->dpto_id = $request->dpto_id;
+
+        $vunidad->save();
+
+        return redirect()->route('unidads.index')
+                        ->with('info','El registro ha sido actualizado ->'. $id);
     }
 
     /**
@@ -88,5 +120,9 @@ class UnidadController extends Controller
     public function destroy($id)
     {
         //
+        $vunidad = Unidad::find($id);
+        $vunidad->delete();
+
+        return back()->with('info', 'El registro fue eliminado');
     }
 }

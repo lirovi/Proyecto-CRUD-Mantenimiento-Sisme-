@@ -33,7 +33,7 @@ Route::resource('cargos','Miscontrollers\CargoController');
 Route::resource('dptos','Miscontrollers\DptoController');
 Route::resource('unidads','Miscontrollers\UnidadController');
 Route::resource('diagnosticos','Miscontrollers\DiagnosticoController');
-Route::resource('solicions','Miscontrollers\SolucionController');
+Route::resource('solucions','Miscontrollers\SolucionController');
 Route::resource('tipomants','Miscontrollers\TipomantController');
 Route::resource('designacions','Miscontrollers\DesignacionController');
 Route::resource('mantenimientos','Miscontrollers\MantenimientoController');

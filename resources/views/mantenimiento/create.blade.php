@@ -1,24 +1,22 @@
-@extends('layouts.app')
+@extends('layout')
 
 @section('content')
+<div class="container">
+<div class="">
+  <h4 class="page-header text-center">
+    Adicionar mantenimiento
 
+  </h4>
+  <a href="{{ route('mantenimientos.index') }}" class="btn btn-outline-info float-right btn-sm">Volver a lista</a>
+</div>
 
-<form class="from-group" action="/Horarios" method="post">
-  @csrf
-  <div class="form-group">
-    <label for="">Nombre</label>
-    <input type="text" name="name" class="form-control" >
-    <label for="">Nombre</label>
-    <input type="text" name="name" class="form-control" >
-    <label for="">Nombre</label>
-    <input type="text" name="name" class="form-control" >
-    <label for="">Nombre</label>
-    <input type="text" name="name" class="form-control" >
-    <label for="">Nombre</label>
-    <input type="text" name="name" class="form-control" >
-    <label for="">Nombre</label>
-    <input type="text" name="name" class="form-control" >
-  </div>
-  <button type="submit" name="btn btn-primary">Guardar</button>
-</form>
+  @include('fragment.error')
+  
+  {!! Form::open(['route' => 'mantenimientos.store']) !!}
+
+    @include('fragment.formmante')
+
+  {!! Form::close() !!}
+
+</div>
 @endsection

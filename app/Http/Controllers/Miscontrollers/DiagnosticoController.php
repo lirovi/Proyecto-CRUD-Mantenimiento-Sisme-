@@ -4,6 +4,9 @@ namespace Sisme\Http\Controllers\Miscontrollers;
 
 use Illuminate\Http\Request;
 use Sisme\Http\Controllers\Controller;
+use Sisme\Http\Requests\DiagnosticoRequest;
+use Sisme\Diagnostico;
+
 
 class DiagnosticoController extends Controller
 {
@@ -14,7 +17,8 @@ class DiagnosticoController extends Controller
      */
     public function index()
     {
-        //
+        $diagnosticos = Diagnostico::orderBy('id','descripcion')->paginate(8);
+    return view('diagnostico.index', compact('diagnosticos'));
     }
 
     /**
@@ -25,6 +29,7 @@ class DiagnosticoController extends Controller
     public function create()
     {
         //
+        return view('diagnostico.create');
     }
 
     /**
@@ -32,10 +37,26 @@ class DiagnosticoController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+
+     public function store(Request $request)
     {
         //
+       $diagnosticos= new diagnostico();
+       $diagnosticos->descripcion = $request->input('descripcion');
+       $diagnosticos->save();
+       return('Grabado');
+    }
+     */
+    public function store(DiagnosticoRequest $request)
+    {
+        //
+        $diagnostico = new Diagnostico;
+        $diagnostico->descripcion = $request->descripcion;
+
+        $diagnostico->save();
+
+        return redirect()->route('diagnosticos.index')
+                        ->with('info','El nuevo registro ha sido guardado');
     }
 
     /**
@@ -46,7 +67,8 @@ class DiagnosticoController extends Controller
      */
     public function show($id)
     {
-        //
+        $diagnostico = Diagnostico::find($id);
+        return view('diagnostico.show', compact('diagnostico'));
     }
 
     /**
@@ -57,7 +79,8 @@ class DiagnosticoController extends Controller
      */
     public function edit($id)
     {
-        //
+        $vdiagnostico = Diagnostico::find($id);
+        return view('diagnostico.edit', compact('vdiagnostico'));
     }
 
     /**
@@ -67,9 +90,16 @@ class DiagnosticoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(DiagnosticoRequest $request, $id)
     {
         //
+        $diagnostico = Diagnostico::find($id);
+        $diagnostico->descripcion = $request->descripcion;
+
+        $diagnostico->save();
+
+        return redirect()->route('diagnosticos.index')
+                        ->with('info','El registro ha sido actualizado ->'. $id);
     }
 
     /**
@@ -81,5 +111,9 @@ class DiagnosticoController extends Controller
     public function destroy($id)
     {
         //
+        $diagnostico = Diagnostico::find($id);
+        $diagnostico->delete();
+
+        return back()->with('info', 'El registro fue eliminado');
     }
 }

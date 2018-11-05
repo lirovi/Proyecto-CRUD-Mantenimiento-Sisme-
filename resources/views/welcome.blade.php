@@ -84,13 +84,19 @@
                     Mantenimiento Equipos 
                 </div>
 
-                <div class="links">
-                      <a href="{{ route('cargos.index') }}">Listado Cargos</a>
-                      <a href="{{ route('equipos.index') }}">Listado Equipos</a>
-                      <a href="{{ route('funcionarios.index') }}">Listado Funcionarios</a>
-                      <a href="{{ route('dptos.index') }}">Listado Deptos</a>
-                      <a href="{{ route('unidads.index') }}">Listado Unidades</a>
-                      <a href="{{ route('profesions.index') }}">Listado Profesiones</a>
+                <div class="links col-md-4 col-md-offset-4" >
+                      <a href="{{ route('cargos.index') }}">Cargos</a>
+                      <a href="{{ route('diagnosticos.index') }}">Diagnósticos</a>
+                      <a href="{{ route('equipos.index') }}">Equipos</a>
+                      <a href="{{ route('funcionarios.index') }}">Funcionarios</a>
+                      <a href="{{ route('dptos.index') }}">Deptos</a>
+                      <a href="{{ route('unidads.index') }}">Unidades</a>
+                      <a href="{{ route('tipoequipos.index') }}">TipoEquipo</a>
+                      <a href="{{ route('tipomants.index') }}">TipoMant.</a>
+                      <a href="{{ route('solucions.index') }}">Soluciones</a>
+                      <a href="{{ route('designacions.index') }}">Designaciones</a>
+                      <a href="{{ route('profesions.index') }}">Profesiones</a>
+                      <a href="{{ route('mantenimientos.index') }}">Mantenimientos</a>
                 </div>
             </div>
         </div>

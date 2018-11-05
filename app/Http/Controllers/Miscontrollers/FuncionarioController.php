@@ -4,7 +4,9 @@ namespace Sisme\Http\Controllers\Miscontrollers;
 
 use Illuminate\Http\Request;
 use Sisme\Http\Controllers\Controller;
+use Sisme\Http\Requests\FuncionarioRequest;
 use Sisme\Funcionario;
+
 
 class FuncionarioController extends Controller
 {
@@ -15,7 +17,7 @@ class FuncionarioController extends Controller
      */
     public function index()
     {
-        $funcionarios = funcionario::orderBy('id','apellido')->paginate(8);
+        $funcionarios = funcionario::orderBy('id','descripcion')->paginate(8);
     return view('funcionario.index', compact('funcionarios'));
     }
 
@@ -35,20 +37,32 @@ class FuncionarioController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+
+     public function store(Request $request)
     {
         //
        $funcionarios= new funcionario();
-       $funcionarios->nombre = $request->input('nombre');
-       $funcionarios->apellido = $request->input('apellido');
-       $funcionarios->direccion = $request->input('direccion');
-       $funcionarios->telefono = $request->input('telefono');
-       $funcionarios->sexo = $request->input('sexo');
-       $funcionarios->fecha_nac = $request->input('fecnac');
-       $funcionarios->prof_id = $request->input('prof');
+       $funcionarios->descripcion = $request->input('descripcion');
        $funcionarios->save();
        return('Grabado');
+    }
+     */
+    public function store(funcionarioRequest $request)
+    {
+        //
+           $funcionario = new funcionario;
+           $funcionarios->nombre = $request->nombre;
+           $funcionarios->apellido = $request->apellido;
+           $funcionarios->direccion = $request->direccion;
+           $funcionarios->telefono = $request->telefono;
+           $funcionarios->sexo = $request->sexo;
+           $funcionarios->fecha_nac = $request->fecha_nac;
+           $funcionarios->prof_id = $request->prof_id;
+
+        $funcionario->save();
+
+        return redirect()->route('funcionarios.index')
+                        ->with('info','El nuevo registro ha sido guardado');
     }
 
     /**
@@ -59,7 +73,8 @@ class FuncionarioController extends Controller
      */
     public function show($id)
     {
-        //
+        $funcionario = funcionario::find($id);
+        return view('funcionario.show', compact('funcionario'));
     }
 
     /**
@@ -70,7 +85,8 @@ class FuncionarioController extends Controller
      */
     public function edit($id)
     {
-        //
+        $vfuncionario = funcionario::find($id);
+        return view('funcionario.edit', compact('vfuncionario'));
     }
 
     /**
@@ -80,9 +96,21 @@ class FuncionarioController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(funcionarioRequest $request, $id)
     {
         //
+        $funcionario = funcionario::find($id);
+          $funcionarios->nombre = $request->nombre;
+           $funcionarios->apellido = $request->apellido;
+           $funcionarios->direccion = $request->direccion;
+           $funcionarios->telefono = $request->telefono;
+           $funcionarios->sexo = $request->sexo;
+           $funcionarios->fecha_nac = $request->fecha_nac;
+           $funcionarios->prof_id = $request->prof_id;
+        $funcionario->save();
+
+        return redirect()->route('funcionarios.index')
+                        ->with('info','El registro ha sido actualizado ->'. $id);
     }
 
     /**
@@ -94,5 +122,9 @@ class FuncionarioController extends Controller
     public function destroy($id)
     {
         //
+        $funcionario = funcionario::find($id);
+        $funcionario->delete();
+
+        return back()->with('info', 'El registro fue eliminado');
     }
 }

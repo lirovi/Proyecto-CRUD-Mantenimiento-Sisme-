@@ -4,7 +4,9 @@ namespace Sisme\Http\Controllers\Miscontrollers;
 
 use Illuminate\Http\Request;
 use Sisme\Http\Controllers\Controller;
+use Sisme\Http\Requests\DptoRequest;
 use Sisme\Dpto;
+
 
 class DptoController extends Controller
 {
@@ -13,9 +15,9 @@ class DptoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-     public function index()
+    public function index()
     {
-        $dptos = dpto::orderBy('id','nombre')->paginate(8);
+        $dptos = Dpto::orderBy('id','nombre')->paginate(8);
     return view('dpto.index', compact('dptos'));
     }
 
@@ -35,16 +37,27 @@ class DptoController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+
+     public function store(Request $request)
     {
         //
        $dptos= new dpto();
-       $dptos->nombre = $request->input('nombre');
+       $dptos->descripcion = $request->input('descripcion');
        $dptos->save();
        return('Grabado');
     }
+     */
+    public function store(DptoRequest $request)
+    {
+        //
+        $dpto = new Dpto;
+        $dpto->nombre = $request->nombre;
 
+        $dpto->save();
+
+        return redirect()->route('dptos.index')
+                        ->with('info','El nuevo registro ha sido guardado');
+    }
 
     /**
      * Display the specified resource.
@@ -54,7 +67,8 @@ class DptoController extends Controller
      */
     public function show($id)
     {
-        //
+        $dpto = Dpto::find($id);
+        return view('dpto.show', compact('dpto'));
     }
 
     /**
@@ -65,7 +79,8 @@ class DptoController extends Controller
      */
     public function edit($id)
     {
-        //
+        $vdpto = Dpto::find($id);
+        return view('dpto.edit', compact('vdpto'));
     }
 
     /**
@@ -75,9 +90,16 @@ class DptoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(DptoRequest $request, $id)
     {
         //
+        $dpto = Dpto::find($id);
+        $dpto->nombre = $request->nombre;
+
+        $dpto->save();
+
+        return redirect()->route('dptos.index')
+                        ->with('info','El registro ha sido actualizado ->'. $id);
     }
 
     /**
@@ -89,5 +111,9 @@ class DptoController extends Controller
     public function destroy($id)
     {
         //
+        $dpto = Dpto::find($id);
+        $dpto->delete();
+
+        return back()->with('info', 'El registro fue eliminado');
     }
 }

@@ -1,18 +1,22 @@
 @extends('layout')
 
 @section('content')
-
-<div class="">
-	<h4 class="page-header text-center">Adicionar Cargo</h4>
-</div>
 <div class="container">
-	<form class="from-group" action="/cargos" method="post">
-	  @csrf
-	  <div class="form-group">
-	    <label for="">Descripción</label>
-	    <input type="text" name="descripcion" class="form-control" >
-	  </div>
-	  <button type="submit" name="btn btn-primary">Guardar</button>
-	</form>
+<div class="">
+	<h4 class="page-header text-center">
+		Adicionar Cargo
+
+	</h4>
+	<a href="{{ route('cargos.index') }}" class="btn btn-outline-info float-right btn-sm">Volver a lista</a>
+</div>
+
+	@include('fragment.error')
+	
+	{!! Form::open(['route' => 'cargos.store']) !!}
+
+		@include('fragment.formcargo')
+
+	{!! Form::close() !!}
+
 </div>
 @endsection

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a2eef830307f50641e27b33f0efd0f8e",
+    "content-hash": "b1ec6f894de5727f874096a74eff4f02",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -904,7 +904,7 @@
         },
         {
             "name": "laravelcollective/html",
-            "version": "v5.7.1",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/LaravelCollective/html.git",

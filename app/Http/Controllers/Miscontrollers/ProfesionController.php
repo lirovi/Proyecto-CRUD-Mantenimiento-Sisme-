@@ -4,7 +4,9 @@ namespace Sisme\Http\Controllers\Miscontrollers;
 
 use Illuminate\Http\Request;
 use Sisme\Http\Controllers\Controller;
+use Sisme\Http\Requests\ProfesionRequest;
 use Sisme\Profesion;
+
 
 class ProfesionController extends Controller
 {
@@ -15,7 +17,7 @@ class ProfesionController extends Controller
      */
     public function index()
     {
-        $profesions = profesion::orderBy('id','descripcion')->paginate(8);
+        $profesions = Profesion::orderBy('id','descripcion')->paginate(8);
     return view('profesion.index', compact('profesions'));
     }
 
@@ -30,19 +32,16 @@ class ProfesionController extends Controller
         return view('profesion.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function store(ProfesionRequest $request)
     {
         //
-       $profesions= new profesion();
-       $profesions->descripcion = $request->input('descripcion');
-       $profesions->save();
-       return('Grabado');
+        $profesion = new Profesion;
+        $profesion->descripcion = $request->descripcion;
+
+        $profesion->save();
+
+        return redirect()->route('profesions.index')
+                        ->with('info','El nuevo registro ha sido guardado');
     }
 
     /**
@@ -53,7 +52,8 @@ class ProfesionController extends Controller
      */
     public function show($id)
     {
-        //
+        $profesion = Profesion::find($id);
+        return view('profesion.show', compact('profesion'));
     }
 
     /**
@@ -64,7 +64,8 @@ class ProfesionController extends Controller
      */
     public function edit($id)
     {
-        //
+        $vprofesion = Profesion::find($id);
+        return view('profesion.edit', compact('vprofesion'));
     }
 
     /**
@@ -74,9 +75,16 @@ class ProfesionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ProfesionRequest $request, $id)
     {
         //
+        $profesion = Profesion::find($id);
+        $profesion->descripcion = $request->descripcion;
+
+        $profesion->save();
+
+        return redirect()->route('profesions.index')
+                        ->with('info','El registro ha sido actualizado ->'. $id);
     }
 
     /**
@@ -88,5 +96,9 @@ class ProfesionController extends Controller
     public function destroy($id)
     {
         //
+        $profesion = Profesion::find($id);
+        $profesion->delete();
+
+        return back()->with('info', 'El registro fue eliminado');
     }
 }

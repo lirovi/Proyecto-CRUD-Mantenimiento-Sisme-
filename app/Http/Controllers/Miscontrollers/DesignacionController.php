@@ -4,6 +4,9 @@ namespace Sisme\Http\Controllers\Miscontrollers;
 
 use Illuminate\Http\Request;
 use Sisme\Http\Controllers\Controller;
+use Sisme\Http\Requests\DesignacionRequest;
+use Sisme\Designacion;
+
 
 class DesignacionController extends Controller
 {
@@ -38,15 +41,23 @@ class DesignacionController extends Controller
     public function store(Request $request)
     {
         //
-       $designacions= new Designacion();
-       $designacions->descripcion = $request->input('descripcion');
-       $designacions->save();
-       return('Grabado');
+        $designacion = new Designacion;
+        $designacion->descripcion = $request->descripcion;
+        $designacion->fun_id = $request->fun_id;
+        $designacion->cargo_id = $request->cargo_id;
+        $designacion->fechadesigna = $request->fecha_designa;
+        $designacion->estado = $request->estado;
+
+        $designacion->save();
+
+        return redirect()->route('designacions.index')
+                        ->with('info','El nuevo registro ha sido guardado');
     }
 
     public function show($id)
     {
-        //
+        $designacion = Designacion::find($id);
+        return view('designacion.show', compact('designacion'));
     }
 
     /**
@@ -57,7 +68,8 @@ class DesignacionController extends Controller
      */
     public function edit($id)
     {
-        //
+        $vdesignacion = Designacion::find($id);
+        return view('designacion.edit', compact('vdesignacion'));
     }
 
     /**
@@ -67,9 +79,20 @@ class DesignacionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(DesignacionRequest $request, $id)
     {
         //
+        $designacion = Designacion::find($id);
+        $designacion->descripcion = $request->descripcion;
+        $designacion->fun_id = $request->fun_id;
+        $designacion->cargo_id = $request->cargo_id;
+        $designacion->fechadesigna = $request->fecha_designa;
+        $designacion->estado = $request->estado;
+
+        $designacion->save();
+
+        return redirect()->route('designacions.index')
+                        ->with('info','El registro ha sido actualizado ->'. $id);
     }
 
     /**
@@ -81,5 +104,9 @@ class DesignacionController extends Controller
     public function destroy($id)
     {
         //
+        $designacion = Designacion::find($id);
+        $designacion->delete();
+
+        return back()->with('info', 'El registro fue eliminado');
     }
 }

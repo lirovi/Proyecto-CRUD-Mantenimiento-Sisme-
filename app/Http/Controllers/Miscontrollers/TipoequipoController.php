@@ -4,6 +4,9 @@ namespace Sisme\Http\Controllers\Miscontrollers;
 
 use Illuminate\Http\Request;
 use Sisme\Http\Controllers\Controller;
+use Sisme\Http\Requests\TipoequipoRequest;
+use Sisme\Tipoequipo;
+
 
 class TipoequipoController extends Controller
 {
@@ -14,7 +17,8 @@ class TipoequipoController extends Controller
      */
     public function index()
     {
-        //
+        $tipoequipos = tipoequipo::orderBy('id','descripcion')->paginate(8);
+    return view('tipoequipo.index', compact('tipoequipos'));
     }
 
     /**
@@ -25,6 +29,7 @@ class TipoequipoController extends Controller
     public function create()
     {
         //
+        return view('tipoequipo.create');
     }
 
     /**
@@ -32,10 +37,26 @@ class TipoequipoController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+
+     public function store(Request $request)
     {
         //
+       $tipoequipos= new tipoequipo();
+       $tipoequipos->descripcion = $request->input('descripcion');
+       $tipoequipos->save();
+       return('Grabado');
+    }
+     */
+    public function store(tipoequipoRequest $request)
+    {
+        //
+        $tipoequipo = new Tipoequipo;
+        $tipoequipo->descripcion = $request->descripcion;
+
+        $tipoequipo->save();
+
+        return redirect()->route('tipoequipos.index')
+                        ->with('info','El nuevo registro ha sido guardado');
     }
 
     /**
@@ -46,7 +67,8 @@ class TipoequipoController extends Controller
      */
     public function show($id)
     {
-        //
+        $tipoequipo = Tipoequipo::find($id);
+        return view('tipoequipo.show', compact('tipoequipo'));
     }
 
     /**
@@ -57,7 +79,8 @@ class TipoequipoController extends Controller
      */
     public function edit($id)
     {
-        //
+        $vtipoequipo = Tipoequipo::find($id);
+        return view('tipoequipo.edit', compact('vtipoequipo'));
     }
 
     /**
@@ -67,9 +90,16 @@ class TipoequipoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(TipoequipoRequest $request, $id)
     {
         //
+        $tipoequipo = Tipoequipo::find($id);
+        $tipoequipo->descripcion = $request->descripcion;
+
+        $tipoequipo->save();
+
+        return redirect()->route('tipoequipos.index')
+                        ->with('info','El registro ha sido actualizado ->'. $id);
     }
 
     /**
@@ -81,5 +111,9 @@ class TipoequipoController extends Controller
     public function destroy($id)
     {
         //
+        $tipoequipo = Tipoequipo::find($id);
+        $tipoequipo->delete();
+
+        return back()->with('info', 'El registro fue eliminado');
     }
 }

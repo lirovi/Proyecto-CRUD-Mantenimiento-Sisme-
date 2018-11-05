@@ -4,6 +4,9 @@ namespace Sisme\Http\Controllers\Miscontrollers;
 
 use Illuminate\Http\Request;
 use Sisme\Http\Controllers\Controller;
+use Sisme\Http\Requests\SolucionRequest;
+use Sisme\Solucion;
+
 
 class SolucionController extends Controller
 {
@@ -14,7 +17,8 @@ class SolucionController extends Controller
      */
     public function index()
     {
-        //
+        $solucions = Solucion::orderBy('id','descripcion')->paginate(8);
+    return view('solucion.index', compact('solucions'));
     }
 
     /**
@@ -25,6 +29,7 @@ class SolucionController extends Controller
     public function create()
     {
         //
+        return view('solucion.create');
     }
 
     /**
@@ -32,10 +37,26 @@ class SolucionController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+
+     public function store(Request $request)
     {
         //
+       $solucions= new solucion();
+       $solucions->descripcion = $request->input('descripcion');
+       $solucions->save();
+       return('Grabado');
+    }
+     */
+    public function store(SolucionRequest $request)
+    {
+        //
+        $solucion = new Solucion;
+        $solucion->descripcion = $request->descripcion;
+
+        $solucion->save();
+
+        return redirect()->route('solucions.index')
+                        ->with('info','El nuevo registro ha sido guardado');
     }
 
     /**
@@ -46,7 +67,8 @@ class SolucionController extends Controller
      */
     public function show($id)
     {
-        //
+        $solucion = Solucion::find($id);
+        return view('solucion.show', compact('solucion'));
     }
 
     /**
@@ -57,7 +79,8 @@ class SolucionController extends Controller
      */
     public function edit($id)
     {
-        //
+        $vsolucion = Solucion::find($id);
+        return view('solucion.edit', compact('vsolucion'));
     }
 
     /**
@@ -67,9 +90,16 @@ class SolucionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(SolucionRequest $request, $id)
     {
         //
+        $solucion = Solucion::find($id);
+        $solucion->descripcion = $request->descripcion;
+
+        $solucion->save();
+
+        return redirect()->route('solucions.index')
+                        ->with('info','El registro ha sido actualizado ->'. $id);
     }
 
     /**
@@ -81,5 +111,9 @@ class SolucionController extends Controller
     public function destroy($id)
     {
         //
+        $solucion = Solucion::find($id);
+        $solucion->delete();
+
+        return back()->with('info', 'El registro fue eliminado');
     }
 }

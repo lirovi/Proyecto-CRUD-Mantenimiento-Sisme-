@@ -1,18 +1,23 @@
-@extends('layouts.app')
+@extends('layout')
 
 @section('content')
-
-<div class="">
-	<h4 class="page-header text-center">Adicionar Profesiones</h4>
-</div>
 <div class="container">
-	<form class="from-group" action="/profesions" method="post">
-	  @csrf
-	  <div class="form-group">
-	    <label for="">Descripción</label>
-	    <input type="text" name="descripcion" class="form-control" >
-	  </div>
-	  <button type="submit" name="btn btn-primary">Guardar</button>
-	</form>
+<div class="">
+	<h4 class="page-header text-center">
+		Adicionar profesión
+
+	</h4>
+	<a href="{{ route('profesions.index') }}" class="btn btn-outline-info float-right btn-sm">Volver a lista</a>
+</div>
+
+	@include('fragment.error')
+	
+	{!! Form::open(['route' => 'profesions.store']) !!}
+
+		@include('fragment.formprofesion')
+
+	{!! Form::close() !!}
+
 </div>
 @endsection
+

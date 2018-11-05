@@ -78,7 +78,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 'es',
 
     /*
     |--------------------------------------------------------------------------
@@ -172,7 +172,8 @@ return [
         // Sisme\Providers\BroadcastServiceProvider::class,
         Sisme\Providers\EventServiceProvider::class,
         Sisme\Providers\RouteServiceProvider::class,
-        //Collective\Html\HtmlServiceProvider::class,
+        Collective\Html\HtmlServiceProvider::class,
+        
 
     ],
 

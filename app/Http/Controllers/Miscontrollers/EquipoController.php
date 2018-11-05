@@ -4,7 +4,10 @@ namespace Sisme\Http\Controllers\Miscontrollers;
 
 use Illuminate\Http\Request;
 use Sisme\Http\Controllers\Controller;
+use Sisme\Http\Requests\EquipoRequest;
+use Sisme\Tipoequipo;
 use Sisme\Equipo;
+
 
 class EquipoController extends Controller
 {
@@ -27,7 +30,8 @@ class EquipoController extends Controller
     public function create()
     {
         //
-        return view('equipo.create');
+        $tequipos = Tipoequipo::All()->pluck('descripcion', 'id');
+        return view('equipo.create', compact('vequipo','vtequipos'));
     }
 
     /**
@@ -36,17 +40,18 @@ class EquipoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(EquipoRequest $request)
     {
         //
-       $equipos= new Equipo();
-       $equipos->descripcion = $request->input('descripcion');
-       $equipos->tequipo_id = $request->input('tipoequipo');
-       $equipos->cod_af = $request->input('codaf');
-       $equipos->serie = $request->input('serie');
-       $equipos->fecha_ing = $request->input('fecingreso');
+       $equipos= new Equipo;
+       $equipos->descripcion = $request->descripcion;
+       $equipos->tequipo_id = $request->tequipo_id;
+       $equipos->cod_af = $request->cod_af;
+       $equipos->serie = $request->serie;
+       $equipos->fecha_ing = $request->fecha_ing;
        $equipos->save();
-       return('Grabado');
+       return redirect()->route('equipos.index')
+                        ->with('info','El nuevo registro ha sido guardado');
     }
 
 
@@ -58,7 +63,8 @@ class EquipoController extends Controller
      */
     public function show($id)
     {
-        //
+        $equipo = Equipo::find($id);
+        return view('equipo.show', compact('equipo'));
     }
 
     /**
@@ -69,7 +75,11 @@ class EquipoController extends Controller
      */
     public function edit($id)
     {
-        //
+        $vequipo = Equipo::find($id);
+        $vtequipos = Tipoequipo::All()->pluck('descricpion', 'id');
+ 
+        return view('equipo.edit', compact('vequipo','vtequipos'));
+        
     }
 
     /**
@@ -79,9 +89,19 @@ class EquipoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+     public function update(EquipoRequest $request, $id)
     {
         //
+        $equipo = Equipo::find($id);
+        $equipo->nombre = $request->descripcion;
+        $equipo->tequipo_id = $request->tequipo_id;
+        $equipos->cod_af = $request->cod_af;
+        $equipos->serie = $request->serie;
+        $equipos->fecha_ing = $request->fecha_ing;
+        $equipo->save();
+
+        return redirect()->route('equipos.index')
+                        ->with('info','El registro ha sido actualizado ->'. $id);
     }
 
     /**
@@ -92,6 +112,9 @@ class EquipoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $equipo = Equipo::find($id);
+        $equipo->delete();
+
+        return back()->with('info', 'El registro fue eliminado');
     }
 }

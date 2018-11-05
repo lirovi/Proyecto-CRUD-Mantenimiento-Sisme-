@@ -4,7 +4,9 @@ namespace Sisme\Http\Controllers\Miscontrollers;
 
 use Illuminate\Http\Request;
 use Sisme\Http\Controllers\Controller;
+use Sisme\Http\Requests\CargoRequest;
 use Sisme\Cargo;
+
 
 class CargoController extends Controller
 {
@@ -35,14 +37,26 @@ class CargoController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+
+     public function store(Request $request)
     {
         //
        $cargos= new Cargo();
        $cargos->descripcion = $request->input('descripcion');
        $cargos->save();
        return('Grabado');
+    }
+     */
+    public function store(CargoRequest $request)
+    {
+        //
+        $cargo = new Cargo;
+        $cargo->descripcion = $request->descripcion;
+
+        $cargo->save();
+
+        return redirect()->route('cargos.index')
+                        ->with('info','El nuevo registro ha sido guardado');
     }
 
     /**
@@ -53,7 +67,8 @@ class CargoController extends Controller
      */
     public function show($id)
     {
-        //
+        $cargo = Cargo::find($id);
+        return view('cargo.show', compact('cargo'));
     }
 
     /**
@@ -64,7 +79,8 @@ class CargoController extends Controller
      */
     public function edit($id)
     {
-        //
+        $vcargo = Cargo::find($id);
+        return view('cargo.edit', compact('vcargo'));
     }
 
     /**
@@ -74,9 +90,16 @@ class CargoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Cargo $cargo)
+    public function update(CargoRequest $request, $id)
     {
         //
+        $cargo = Cargo::find($id);
+        $cargo->descripcion = $request->descripcion;
+
+        $cargo->save();
+
+        return redirect()->route('cargos.index')
+                        ->with('info','El registro ha sido actualizado ->'. $id);
     }
 
     /**
@@ -85,9 +108,12 @@ class CargoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Cargo $cargo)
+    public function destroy($id)
     {
         //
-        return $cargo;
+        $cargo = Cargo::find($id);
+        $cargo->delete();
+
+        return back()->with('info', 'El registro fue eliminado');
     }
 }
