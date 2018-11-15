@@ -169,7 +169,7 @@ return [
          */
         Sisme\Providers\AppServiceProvider::class,
         Sisme\Providers\AuthServiceProvider::class,
-        // Sisme\Providers\BroadcastServiceProvider::class,
+        Sisme\Providers\BroadcastServiceProvider::class,
         Sisme\Providers\EventServiceProvider::class,
         Sisme\Providers\RouteServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,

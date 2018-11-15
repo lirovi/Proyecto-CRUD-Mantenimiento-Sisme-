@@ -18,5 +18,12 @@
         "lodash": "^4.17.5",
         "popper.js": "^1.12",
         "vue": "^2.5.17"
+    },
+    "dependencies": {
+        "ajv": "^6.5.5",
+        "imagemin": "^6.0.0",
+        "laravel-echo": "^1.4.1",
+        "pusher-js": "^4.3.1",
+        "vue-resource": "^1.5.1"
     }
 }

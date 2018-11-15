@@ -1,6 +1,8 @@
 
 // Fonts
 @import url('https://fonts.googleapis.com/css?family=Nunito');
+
+//icons
 @import url('https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
 
 // Variables
@@ -28,7 +30,7 @@ $google-color: #dd4b39;
 .btn-facebook{
   background-color: $facebook-color;
   border-color: darken($facebook-color, 3%);
-  }
+ }
 
 .btn-twitter{
   background-color: $twitter-color;

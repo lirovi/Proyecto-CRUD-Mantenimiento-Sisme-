@@ -28,8 +28,8 @@ class FuncionarioController extends Controller
      */
     public function create()
     {
-        //
-        return view('funcionario.create');
+      
+        return view('funcionario.index');
     }
 
     /**
@@ -47,10 +47,10 @@ class FuncionarioController extends Controller
        return('Grabado');
     }
      */
-    public function store(funcionarioRequest $request)
+    public function store(FuncionarioRequest $request)
     {
         //
-           $funcionario = new funcionario;
+           $funcionario = new Funcionario;
            $funcionarios->nombre = $request->nombre;
            $funcionarios->apellido = $request->apellido;
            $funcionarios->direccion = $request->direccion;

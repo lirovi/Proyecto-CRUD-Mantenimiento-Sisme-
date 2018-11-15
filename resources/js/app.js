@@ -14,8 +14,15 @@ window.Vue = require('vue');
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
+ import VueResource from 'vue-resource';
+ Vue.use(VueResource);
 
-Vue.component('example-component', require('./components/ExampleComponent.vue'));
+ Vue.http.interceptors.push((request, next) =>{
+ 	request.headers.set('X-CSRF-TOKEN', Laravel.csfrToken);
+ 	next();
+ });
+
+Vue.component('comments-box', require('./components/Comments.vue'));
 
 const app = new Vue({
     el: '#app'

@@ -8,7 +8,7 @@
   </head>
   <body>
     <nav class="navbar navbar-dark bg-primary">
-      <a href="back()" class="navbar-brand">Mantenimiento Equipos - SISME</a>
+      <a href="#" class="navbar-brand">Mantenimiento Equipos - SISME</a>
 
     </nav>
 

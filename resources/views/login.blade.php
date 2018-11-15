@@ -67,7 +67,7 @@
                     </form>
                 </div>
 
-                <div class="panel-footer text-center">
+                <div class="panel-footer text-center" >
                   <a href="#" class="btn btn-facebook">
                     <i class="fa fa-facebook"></i>
                     Login con facebook

@@ -4,7 +4,7 @@
 </div>
 <div class="form-group">
 	{!! Form::label('dpto_id','Nombre del Departamento') !!}
-	{!! Form::select('dpto_id', $vdptos, null) !!}
+	{!! Form::select('id', $vdptos, null) !!}
 </div>
 
 <div class="form-group">

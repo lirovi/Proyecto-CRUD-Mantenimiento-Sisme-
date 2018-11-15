@@ -8,6 +8,7 @@
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
         <!-- Styles -->
         <style>
@@ -84,7 +85,7 @@
                     Mantenimiento Equipos 
                 </div>
 
-                <div class="links col-md-4 col-md-offset-4" >
+                <div class="links col-b-10 col-md-offset-4 text-center" >
                       <a href="{{ route('cargos.index') }}">Cargos</a>
                       <a href="{{ route('diagnosticos.index') }}">Diagnósticos</a>
                       <a href="{{ route('equipos.index') }}">Equipos</a>

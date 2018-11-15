@@ -15,22 +15,22 @@
 
 <div class="form-group">
 	{!! Form::label('telefono','Telefono') !!}
-{!! Form::text('telefono',null,['class' => 'form-control']) !!}
+	{!! Form::text('telefono',null,['class' => 'form-control']) !!}
 </div>
 
 <div class="form-group">
 	{!! Form::label('sexo','Género') !!}
-{!! Form::text('sexo',null,['class' => 'form-control']) !!}
+	{!! Form::text('sexo',null,['class' => 'form-control']) !!}
 </div>
 
 <div class="form-group">
 	{!! Form::label('fecha_nac','Fecha Nacimiento') !!}
-{!! Form::text('fecha_nac',null,['class' => 'form-control']) !!}
+	{!! Form::text('fecha_nac',null,['class' => 'form-control']) !!}
 </div>
 
 <div class="form-group">
 	{!! Form::label('prof_id','Profesión') !!}
-{!! Form::text('prof_id',null,['class' => 'form-control']) !!}
+	{!! Form::select('prof_id', $vprofs, null) !!}
 </div>
 
 <div class="form-group">

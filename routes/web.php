@@ -25,6 +25,34 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/redirect','SocialController@redirect');
 Route::get('/callback','SocialController@callback');
 
+Route::group(['prefix' => 'pusher', 'middleware' => ['auth']], function()
+{
+	Route::post('posts/{id}', function($id, \Illuminate\Http\Request $request){
+		$comment = new \App\Comment([
+			'comment' => $request->input('comment'),
+			'user_id' => auth()->user()->id,
+			'post_id' => $id
+
+		]);
+		$comment->save();
+
+		broadcast(new \App\Events\FireComment($comment))->toOthers();
+
+	})->name('comments.create');
+
+	Route::get('posts/{id}', function($id){
+		$post = \App\Post::findOrFail($id);
+		return view('chat', compact('post'));
+	});
+
+	Route::get('comment/{id}', function($id){
+		$comments = \App\Comment::where('post_id',$id)->with('user')-get();
+		return response()->json('comments');
+	})->name('comments.list');
+
+
+});
+
 Route::resource('tipoequipos','Miscontrollers\TipoequipoController');
 Route::resource('equipos','Miscontrollers\EquipoController');
 Route::resource('profesions','Miscontrollers\ProfesionController');
