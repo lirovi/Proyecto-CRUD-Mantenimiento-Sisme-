@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('app');
 });
 
 Route::get('/navbar', function () {
@@ -22,8 +22,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/redirect','SocialController@redirect');
-Route::get('/callback','SocialController@callback');
+
 
 Route::group(['prefix' => 'pusher', 'middleware' => ['auth']], function()
 {
@@ -52,15 +51,17 @@ Route::group(['prefix' => 'pusher', 'middleware' => ['auth']], function()
 
 
 });
+Route::get('/redirect','SocialController@redirect');
+Route::get('/callback','SocialController@callback');
 
 Route::resource('tipoequipos','Miscontrollers\TipoequipoController');
 Route::resource('equipos','Miscontrollers\EquipoController');
 Route::resource('profesions','Miscontrollers\ProfesionController');
 Route::resource('funcionarios','Miscontrollers\FuncionarioController');
-Route::resource('cargos','Miscontrollers\CargoController');
+Route::resource('cargos','Miscontrollers\CargoController',['except' => 'show' ]);
 Route::resource('dptos','Miscontrollers\DptoController');
-Route::resource('unidads','Miscontrollers\UnidadController');
 Route::resource('diagnosticos','Miscontrollers\DiagnosticoController');
+Route::resource('unidads','Miscontrollers\UnidadController');
 Route::resource('solucions','Miscontrollers\SolucionController');
 Route::resource('tipomants','Miscontrollers\TipomantController');
 Route::resource('designacions','Miscontrollers\DesignacionController');
