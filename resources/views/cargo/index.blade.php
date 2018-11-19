@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="row">
+<div id="crud" class="row">
   <div class="col-xs-12">
     <nav class="navbar navbar-dark bg-primary">
       <a href="#" class="navbar-brand">Mantenimiento Equipos</a>
@@ -22,7 +22,7 @@
         </tr>
       </thead>
       <tbody>
-            <tr class="text-left">
+            <tr v-for="descripcion in descripcions">
               <td width="30px">tarea 1</td>
               <td width="500px">descripcicon tarea</td>
               
@@ -38,9 +38,11 @@
             </tr>
       </tbody>
     </table>
-    <ul class="pagination">
-            
-      </ul>
+   <div class="col-sm-5">
+     <pre>
+      @{{ $data }}
+    </pre>
+   </div>
 
   </div>
 </div>
