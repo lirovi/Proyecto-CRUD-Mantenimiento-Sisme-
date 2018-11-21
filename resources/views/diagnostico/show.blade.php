@@ -1,8 +1,6 @@
 @extends('app')
 
 @section('content')
-<div class="container">
-  <div class="col-sm-8">
 
       <h4 class="page-header text-center">
         Ver diagnostico
@@ -12,6 +10,4 @@
       <a href="{{route('diagnosticos.edit',$diagnostico->id)}}"class="btn btn-outline-success floar-right">Editar</a>
       <p>{{ $diagnostico->descripcion }}</p>
       
-  </div>
-</div>
 @endsection

@@ -4,68 +4,76 @@ namespace Sisme\Http\Controllers\Miscontrollers;
 
 use Illuminate\Http\Request;
 use Sisme\Http\Controllers\Controller;
-//use Sisme\Http\Requests\CargoRequest;
 use Sisme\Cargo;
-
 
 class CargoController extends Controller
 {
-  
-    public function index()
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index(Request $request)
     {
-        $cargos = Cargo::get();
-        return view('cargo.index');
+        $cargos = Cargo::orderBy('id', 'DESC')->paginate(2);
 
+        return [
+            'pagination' => [
+                'total'         => $cargos->total(),
+                'current_page'  => $cargos->currentPage(),
+                'per_page'      => $cargos->perPage(),
+                'last_page'     => $cargos->lastPage(),
+                'from'          => $cargos->firstItem(),
+                'to'            => $cargos->lastItem(),
+            ],
+            'cargos' => $cargos
+        ];
     }
 
-   
-    public function create()
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
     {
-        //
-        return view('cargo.create');
+        $this->validate($request, [
+            'descripcion' => 'required'
+        ]);
+
+        Cargo::create($request->all());
+
+        return;
     }
 
-  
-    public function store(CargoRequest $request)
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
     {
-        //
-        $cargo = new Cargo;
-        $cargo->descripcion = $request->descripcion;
+        $this->validate($request, [
+            'descripcion' => 'required',
+        ]);
 
-        $cargo->save();
+        cargo::find($id)->update($request->all());
 
-        return redirect()->route('cargos.index')
-                        ->with('info','El nuevo registro ha sido guardado');
+        return;
     }
 
-   
-    public function edit($id)
-    {
-        $vcargo = Cargo::findOrFail($id);
-        return '$vcargo';
-    }
-
-   
-    public function update(CargoRequest $request, $id)
-    {
-        //
-        $cargo = Cargo::find($id);
-        $cargo->descripcion = $request->descripcion;
-
-        $cargo->save();
-
-        return redirect()->route('cargos.index')
-                        ->with('info','El registro ha sido actualizado ->'. $id);
-    }
-
-   
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
     public function destroy($id)
     {
-        //
-        $cargo = Cargo::findOrFail($id);
-        $cargo->delete();
-       
+        $cargos = cargo::findOrFail($id);
+        $cargos->delete();
     }
-    
-   
 }

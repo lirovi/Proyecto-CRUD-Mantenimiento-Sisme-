@@ -6,15 +6,12 @@
 
         <title>Sisme Vue</title>
          <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-        <!-- Bootstrap 3.3.5 -->
+        
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-        <link rel="stylesheet" href="css/bootstrap.min.css">
-        <!-- Font Awesome -->
+       <!--<link rel="stylesheet" href="css/bootstrap.min.css">-->
         <link rel="stylesheet" href="css/font-awesome.css">
-        <!-- Theme style -->
+        
         <link rel="stylesheet" href="css/AdminLTE.min.css">
-        <!-- AdminLTE Skins. Choose a skin from the css/skins
-             folder instead of downloading all of them to reduce the load. -->
         <link rel="stylesheet" href="css/_all-skins.min.css">
         <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
         <link rel="shortcut icon" href="img/favicon.ico">
@@ -27,7 +24,7 @@
       <header class="main-header">
 
         <!-- Logo -->
-        <a href="index2.html" class="logo">
+        <a href="#" class="logo">
           <!-- mini logo for sidebar mini 50x50 pixels -->
           <span class="logo-mini"><b>S</b>V</span>
           <!-- logo for regular state and mobile devices -->
@@ -182,12 +179,18 @@
         <!-- Main content -->
         <section class="content">
            <div class="box-body">
-              <div class="row">
-                <div class="col-md-12">
+              <div class="col-sm-11"> 
+                <nav class="navbar navbar-dark bg-primary">
+                      <a href="#" class="navbar-brand">Mantenimiento Equipos</a>
+
+                    </nav>
+                <div class="">
+
+                    
                         <!--Contenido-->
                         @yield('content')
                         <!--Fin Contenido-->
-                     </div>
+
                   </div>
                   
                 </div>
@@ -204,15 +207,15 @@
       </footer>
 
       
-      <!-- jQuery 2.1.4 -->
+     <script src="{{ asset('js/app.js') }}"></script>
       <script src="js/jQuery-2.1.4.min.js"></script>
       <!-- Bootstrap 3.3.5 -->
       <script src="js/bootstrap.min.js"></script>
       <!-- AdminLTE App -->
       <script src="js/app.min.js"></script>
-      <script src="{{ asset('js/app.js') }}"></script>
-      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+      
+     <!--  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script> jQuery 2.1.4 -->
       
     </body>
 </html>

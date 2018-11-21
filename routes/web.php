@@ -51,8 +51,7 @@ Route::group(['prefix' => 'pusher', 'middleware' => ['auth']], function()
 
 
 });
-Route::get('/redirect','SocialController@redirect');
-Route::get('/callback','SocialController@callback');
+
 
 Route::resource('tipoequipos','Miscontrollers\TipoequipoController');
 Route::resource('equipos','Miscontrollers\EquipoController');
@@ -66,3 +65,4 @@ Route::resource('solucions','Miscontrollers\SolucionController');
 Route::resource('tipomants','Miscontrollers\TipomantController');
 Route::resource('designacions','Miscontrollers\DesignacionController');
 Route::resource('mantenimientos','Miscontrollers\MantenimientoController');
+

@@ -1,12 +1,7 @@
 @extends('app')
 
 @section('content')
-<div class="container">
-  <div class="col-sm-9">
-    <nav class="navbar navbar-dark bg-primary">
-      <a href="#" class="navbar-brand">Mantenimiento Equipos</a>
 
-    </nav>
     <h4 class="page-header text-center">
       Listado de diagnósticos
     </h4>
@@ -44,6 +39,5 @@
             
       </ul>
     {!! $diagnosticos->render() !!}
-  </div>
-</div>
+
 @endsection
